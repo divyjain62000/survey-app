@@ -4,12 +4,14 @@ import com.survey.exception.SurveyAppException;
 import com.survey.response.ActionResponse;
 import com.survey.service.survey.SurveyService;
 import com.survey.service.survey.dto.SurveyDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/survey")
+@Slf4j
 public class SurveyResource {
 
     @Autowired
@@ -19,6 +21,7 @@ public class SurveyResource {
     public ResponseEntity<ActionResponse> createSurvey(@RequestBody SurveyDTO surveyDTO) {
         ActionResponse actionResponse=new ActionResponse();
         try{
+            log.debug("SurveyDTO: {}",surveyDTO);
             surveyService.save(surveyDTO);
             actionResponse.setSuccessful(true);
             actionResponse.setResult(null);

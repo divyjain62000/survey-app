@@ -3,7 +3,6 @@ package com.survey.domain.survey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.survey.domain.question.Question;
 import com.survey.domain.survey.response.SurveyResponse;
-import com.survey.domain.survey.response.SurveyResponseTrack;
 import com.survey.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +33,8 @@ public class Survey {
     @Column(nullable = false)
     private LocalDateTime lastDateToFill;
 
-    @Column(nullable = false)
-    private boolean isResponseEditable=false;
+    @Column(name="is_response_editable",nullable = false)
+    private boolean isResponseEditable;
 
     @ManyToOne
     private User createdBy;
@@ -44,10 +43,6 @@ public class Survey {
     @OneToMany(mappedBy = "survey")
     private List<SurveyResponse> surveyResponseList;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "survey")
-    private List<SurveyResponseTrack> surveyResponseTrackList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "survey")

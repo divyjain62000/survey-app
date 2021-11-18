@@ -8,6 +8,7 @@ import com.survey.repository.survey.SurveyRepository;
 import com.survey.service.auth.security.SecurityUtils;
 import com.survey.service.survey.SurveyService;
 import com.survey.service.survey.dto.SurveyDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
+@Slf4j
 public class SurveyServiceImpl implements SurveyService {
 
     @Autowired
@@ -31,6 +33,8 @@ public class SurveyServiceImpl implements SurveyService {
             ModelMapper mapper = new ModelMapper();
             Survey survey = mapper.map(surveyDTO, Survey.class);
             survey.setCreatedBy(securityUtils.getUser());
+            log.debug("Survey: {}",survey);
+            log.debug("SurveyDTO: {}",surveyDTO);
             this.surveyRepository.save(survey);
         }
         else {

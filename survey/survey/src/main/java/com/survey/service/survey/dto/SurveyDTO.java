@@ -16,6 +16,6 @@ public class SurveyDTO extends DataTransferObject {
     private String name;
     private String description;
     private LocalDateTime lastDateToFill;
-    private boolean isResponseEditable;
+    private Boolean isResponseEditable;
 
 }

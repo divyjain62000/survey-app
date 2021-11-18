@@ -11,7 +11,7 @@ id INTEGER	PRIMARY KEY AUTOINCREMENT,
 name TEXT NOT NULL,
 description TEXT NOT NULL,
 last_date_to_fill  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-is_response_editable INTEGER NOT NULL,
+is_response_editable BOOLEAN NOT NULL,
 created_by_id INTEGER,
 FOREIGN KEY(created_by_id) REFERENCES user(id)
 );
@@ -36,11 +36,3 @@ FOREIGN KEY(user_id) REFERENCES user(id)
 FOREIGN KEY(question_id) REFERENCES question(id)
 );
 
-create table survey_response_track
-(
-id INTEGER	PRIMARY KEY AUTOINCREMENT,
-survey_id INTEGER,
-user_id INTEGER,
-FOREIGN KEY(survey_id) REFERENCES survey(id)
-FOREIGN KEY(user_id) REFERENCES user(id)
-);

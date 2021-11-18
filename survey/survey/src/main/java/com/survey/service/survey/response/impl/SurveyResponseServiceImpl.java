@@ -2,7 +2,6 @@ package com.survey.service.survey.response.impl;
 
 import com.survey.domain.question.Question;
 import com.survey.domain.survey.response.SurveyResponse;
-import com.survey.domain.survey.response.SurveyResponseTrack;
 import com.survey.domain.survey.Survey;
 import com.survey.domain.user.User;
 import com.survey.enums.error.ErrorFor;
@@ -12,7 +11,6 @@ import com.survey.exception.SurveyAppException;
 import com.survey.repository.question.QuestionRepository;
 import com.survey.repository.survey.SurveyRepository;
 import com.survey.repository.survey.response.SurveyResponseRepository;
-import com.survey.repository.survey.response.SurveyResponseTrackRepository;
 import com.survey.repository.user.UserRepository;
 import com.survey.service.auth.security.SecurityUtils;
 import com.survey.service.survey.response.SurveyResponseService;
@@ -38,8 +36,6 @@ public class SurveyResponseServiceImpl implements SurveyResponseService {
     @Autowired
     private SurveyResponseRepository surveyResponseRepository;
 
-    @Autowired
-    private SurveyResponseTrackRepository surveyResponseTrackRepository;
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -74,10 +70,7 @@ public class SurveyResponseServiceImpl implements SurveyResponseService {
                     }
                 }
             }
-            SurveyResponseTrack surveyResponseTrack=new SurveyResponseTrack();
-            surveyResponseTrack.setSurvey(survey.get());
-            surveyResponseTrack.setUser(user);
-            this.surveyResponseTrackRepository.save(surveyResponseTrack);
+
         }
         else {
             if(surveyAppException.getExceptions().size()>0) throw surveyAppException;
@@ -143,7 +136,7 @@ public class SurveyResponseServiceImpl implements SurveyResponseService {
             }
 
             if(survey.get().isResponseEditable()==false) {
-                List<SurveyResponseTrack> surveyResponseTrackList=this.surveyResponseTrackRepository.findBySurveyIdAndUserId(surveyId,securityUtils.getUser().getId());
+                List<SurveyResponse> surveyResponseTrackList=this.surveyResponseRepository.findBySurveyIdAndUserId(surveyId,securityUtils.getUser().getId());
                log.debug("surveyResponseTrackList: {}",surveyResponseTrackList);
                 log.debug("surveyResponseTrackList size: {}",surveyResponseTrackList.size());
                 if(surveyResponseTrackList!=null && surveyResponseTrackList.size()>0) {

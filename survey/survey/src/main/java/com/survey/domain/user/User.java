@@ -2,7 +2,6 @@ package com.survey.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.survey.domain.survey.Survey;
-import com.survey.domain.survey.response.SurveyResponseTrack;
 import com.survey.domain.survey.response.SurveyResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,11 +30,6 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<SurveyResponse> surveyResponseList;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<SurveyResponseTrack> surveyResponseTrackList;
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "createdBy")
