@@ -36,3 +36,9 @@ FOREIGN KEY(user_id) REFERENCES user(id)
 FOREIGN KEY(question_id) REFERENCES question(id)
 );
 
+create table feedback
+(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+description TEXT
+);
+
